@@ -6,6 +6,7 @@ import jwtDecode from "jwt-decode";
 import { useRecoilState } from "recoil";
 import { userType } from "../../type";
 import { userState } from "../../store";
+import { logIn } from "../../api";
 
 const Signin = () => {
   const inputStyle =
@@ -38,10 +39,7 @@ const Signin = () => {
   const signIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:5000/auth/signIn",
-        userFormData
-      );
+      const res = await logIn(userFormData);
       localStorage.setItem("token", res.data.token);
       const { userName, _id } = jwtDecode<userType>(res.data.token);
       setUserData({ userName, _id });

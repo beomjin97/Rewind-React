@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { register } from "../../api";
 
 const Signup = () => {
   const inputStyle =
@@ -45,10 +45,7 @@ const Signup = () => {
   const signUp = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:5000/auth/signUp",
-        userData
-      );
+      const res = await register(userData);
       alert(res.data.message);
     } catch (error: any) {
       alert(error.response.data.message);
