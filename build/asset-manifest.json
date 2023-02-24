@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/rewind-react.js/static/css/main.ac2b8a68.css",
-    "main.js": "/rewind-react.js/static/js/main.77d34fa5.js",
-    "static/js/787.f92f474d.chunk.js": "/rewind-react.js/static/js/787.f92f474d.chunk.js",
-    "index.html": "/rewind-react.js/index.html",
-    "main.ac2b8a68.css.map": "/rewind-react.js/static/css/main.ac2b8a68.css.map",
-    "main.77d34fa5.js.map": "/rewind-react.js/static/js/main.77d34fa5.js.map",
-    "787.f92f474d.chunk.js.map": "/rewind-react.js/static/js/787.f92f474d.chunk.js.map"
+    "main.css": "./static/css/main.ac2b8a68.css",
+    "main.js": "./static/js/main.99acc85f.js",
+    "static/js/787.f92f474d.chunk.js": "./static/js/787.f92f474d.chunk.js",
+    "index.html": "./index.html",
+    "main.ac2b8a68.css.map": "./static/css/main.ac2b8a68.css.map",
+    "main.99acc85f.js.map": "./static/js/main.99acc85f.js.map",
+    "787.f92f474d.chunk.js.map": "./static/js/787.f92f474d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ac2b8a68.css",
-    "static/js/main.77d34fa5.js"
+    "static/js/main.99acc85f.js"
   ]
 }
