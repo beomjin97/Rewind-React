@@ -1,6 +1,10 @@
 import axios from "axios";
+import { signInformData, singUpformData } from "../type";
 
-const API = axios.create({ baseURL: "http://localhost:5000" });
+const devURL = "http://localhost:5001";
+const prodURL = "http://13.112.212.213";
+
+const API = axios.create({ baseURL: prodURL });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("token") && req.headers) {
@@ -9,25 +13,28 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
-export const createPost = (newPost: any) => API.post("/post", newPost);
-export const getPost = () => API.get("/post");
-export const deletePost = (postId: string) => API.delete(`/post/${postId}`);
+export const createPost = (newPost: any) => API.post("/api/post", newPost);
+export const getPost = () => API.get("/api/post");
+export const deletePost = (postId: string) => API.delete(`/api/post/${postId}`);
 export const editPost = (postId: string, payload: any) =>
-  API.patch(`/post/${postId}`, payload);
-export const likePost = (postId: string) => API.post(`/post/${postId}/like`);
-export const getPostById = (postId: string) => API.get(`/post/${postId}`);
-export const getPostByTag = (tag: string) => API.get(`/post/?tag=${tag}`);
-export const getTags = () => API.get("/post/tags");
+  API.patch(`/api/post/${postId}`, payload);
+export const likePost = (postId: string) =>
+  API.post(`/api/post/${postId}/like`);
+export const getPostById = (postId: string) => API.get(`/api/post/${postId}`);
+export const getPostByTag = (tag: string) => API.get(`/api/post/?tag=${tag}`);
+export const getTags = () => API.get("/api/post/tags");
 
 export const createComment = (comment: string, postId: string) =>
-  API.post(`/post/${postId}/comment`, { comment });
+  API.post(`/api/post/${postId}/comment`, { comment });
 
-export const getUserById = (userId: string) => API.get(`/user/${userId}`);
+export const getUserById = (userId: string) => API.get(`/api/user/${userId}`);
 export const followUser = (followingId: string) =>
-  API.post(`/user/follow/${followingId}`);
+  API.post(`/api/user/follow/${followingId}`);
 export const searchUser = (userName: string) =>
-  API.get(`/search?user=${userName}`);
+  API.get(`/api/search?user=${userName}`);
 
-export const verifyUser = () => API.post("/verify");
-// export const signIn
-// export const signUp
+export const verifyUser = () => API.post("/api/verify");
+export const register = (formData: singUpformData) =>
+  API.post("/api/auth/signIn", formData);
+export const logIn = (formdata: signInformData) =>
+  API.post("/api/auth/signIn", formdata);
