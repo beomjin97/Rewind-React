@@ -76,7 +76,7 @@ const Post = ({ post }: Props) => {
       >
         {post.imgUrl && post.imgUrl.length > 1 && (
           <img
-            src={`http://localhost:5001/api/uploads/${post.imgUrl[0]}`}
+            src={`http://13.112.212.213/api/uploads/${post.imgUrl[0]}`}
             alt=""
             className="w-[100%] h-[100%] object-contain"
           />
