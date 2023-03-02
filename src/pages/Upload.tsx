@@ -44,9 +44,7 @@ const Upload = () => {
     console.log("photoFiles", photoFiles);
     try {
       const formData = new FormData();
-      tags.forEach((t) => {
-        formData.append("tags", t);
-      });
+      formData.append("tags", JSON.stringify(tags));
       formData.append("content", content);
       if (photoFiles !== undefined) {
         for (let i = 0; i < photoFiles.length; i++) {
