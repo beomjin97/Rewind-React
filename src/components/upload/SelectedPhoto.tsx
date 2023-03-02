@@ -2,13 +2,13 @@ import React, { Dispatch, SetStateAction } from "react";
 
 interface Props {
   photo: string;
-  setPhotos: Dispatch<SetStateAction<string[]>>;
+  setPreview: Dispatch<SetStateAction<string[]>>;
   idx: number;
 }
 
-const SelectedPhoto = ({ photo, setPhotos, idx }: Props) => {
+const SelectedPhoto = ({ photo, setPreview, idx }: Props) => {
   const handleClick = () => {
-    setPhotos((prev) => prev.filter((_, index) => index !== idx));
+    setPreview((prev) => prev.filter((_, index) => index !== idx));
   };
 
   return (
