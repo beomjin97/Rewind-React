@@ -9,7 +9,7 @@ import PostDetail from "./pages/PostDetail";
 import Upload from "./pages/Upload";
 import UserDetail from "./pages/UserDetail";
 import Main from "./components/common/Main";
-import Update from "./pages/Update";
+//import Update from "./pages/Update";
 
 import { userState } from "../src/store";
 import { userType } from "../src/type";
@@ -44,7 +44,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="user/:userId" element={<UserDetail />} />
         <Route path="upload" element={<Upload />} />
-        <Route path="update/:postId" element={<Update />} />
+        <Route path="update/:postId" element={<Upload />} />
       </Route>
       <Route path="auth" element={<Auth />} />
       <Route path="post/:postId" element={<PostDetail />} />

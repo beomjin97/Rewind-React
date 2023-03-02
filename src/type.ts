@@ -9,7 +9,7 @@ export interface PostType {
   _id: string;
   content: string;
   author: userType;
-  imgUrl?: string;
+  imgUrl?: string[];
   like: string[];
   tags?: string[];
   comment?: CommentType[];

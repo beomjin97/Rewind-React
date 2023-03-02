@@ -1,42 +1,59 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import InputFiles from "../components/upload/InputFiles";
 import SelectedPhoto from "../components/upload/SelectedPhoto";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
-import { createPost } from "../api";
+import { createPost, getPostById } from "../api";
 
 const Upload = () => {
-  const [photos, setPhotos] = useState<string[]>([]);
-  const [base64, setBase64] = useState<string | ArrayBuffer | null>("");
+  const [previews, setPreview] = useState<string[]>([]);
+  const [photoFiles, setPhotoFiles] = useState<FileList | []>([]);
   const [content, setContent] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
   const [tag, setTag] = useState<string>("");
 
+  const { postId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const chipInput = useRef<HTMLInputElement>(null);
 
-  const handleChange = ({
-    base64,
-  }: {
-    base64: string | ArrayBuffer | null;
-  }) => {
-    setBase64(base64);
-  };
+  useEffect(() => {
+    if (location.pathname.startsWith("/update")) {
+      getPostById(postId || "")
+        .then((res) => {
+          setPreview([res.data.imgUrl]);
+          setPhotoFiles(res.data.imgUrl);
+          setContent(res.data.content);
+          setTags(res.data.tags);
+        })
+        .catch((err) => {
+          alert("존재하지 않는 게시글 입니다.");
+          navigate("/");
+        });
+    }
+  }, [location, postId]);
 
   const cancel = () => {
-    setPhotos([]);
-    setBase64("");
+    setPreview([]);
     setContent("");
     setTags([]);
+    setPhotoFiles([]);
   };
 
   const submit = async () => {
+    console.log("photoFiles", photoFiles);
     try {
-      const res = await createPost({
-        content,
-        tags,
-        files: base64,
+      const formData = new FormData();
+      tags.forEach((t) => {
+        formData.append("tags", t);
       });
+      formData.append("content", content);
+      if (photoFiles !== undefined) {
+        for (let i = 0; i < photoFiles.length; i++) {
+          formData.append("photoFiles", photoFiles[i], photoFiles[i].name);
+        }
+      }
+      const res = await createPost(formData);
       console.log(res.data);
       alert("업로드 되었습니다.");
       navigate("/");
@@ -70,16 +87,19 @@ const Upload = () => {
             rewind your memory with <span className="text-primary">Rewind</span>
           </h3>
           <div className="flex justify-between mt-8 sm:block">
-            {photos.length === 0 ? (
-              <InputFiles handleChange={handleChange} setPhotos={setPhotos} />
+            {previews.length === 0 ? (
+              <InputFiles
+                setPreview={setPreview}
+                setPhotoFiles={setPhotoFiles}
+              />
             ) : (
               <div className="w-[50%] h-[60vh] flex flex-wrap border-dashed border-[#00000050] border-[1px]">
-                {photos.map((photo, idx) => (
+                {previews.map((preview, idx) => (
                   <SelectedPhoto
                     key={idx}
                     idx={idx}
-                    photo={photo}
-                    setPhotos={setPhotos}
+                    photo={preview}
+                    setPreview={setPreview}
                   />
                 ))}
               </div>

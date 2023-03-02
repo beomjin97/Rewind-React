@@ -74,11 +74,13 @@ const Post = ({ post }: Props) => {
         className="w-[100%] h-[400px] bg-[#00000030] my-2 overflow-hidden cursor-pointer"
         onClick={() => navigate(`/post/${post._id}`)}
       >
-        <img
-          src={post.imgUrl ? post.imgUrl : ""}
-          alt=""
-          className="w-[100%] h-[100%] object-contain"
-        />
+        {post.imgUrl && post.imgUrl.length > 1 && (
+          <img
+            src={`http://localhost:5001/api/uploads/${post.imgUrl[0]}`}
+            alt=""
+            className="w-[100%] h-[100%] object-contain"
+          />
+        )}
       </div>
       <div className="flex justify-between my-2">
         <div className="flex">

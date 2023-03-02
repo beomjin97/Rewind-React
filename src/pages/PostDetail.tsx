@@ -72,7 +72,7 @@ const PostDetail = () => {
         />
         <div className="w-[100%] md:h-auto h-[660px] bg-[#D9D9D9] overflow-hidden flex justify-center">
           <img
-            src={post.imgUrl ? post.imgUrl : ""}
+            src={post.imgUrl ? post.imgUrl[0] : ""}
             alt=""
             className="h-[100%] object-scale-down"
           />
