@@ -74,7 +74,7 @@ const Post = ({ post }: Props) => {
         className="w-[100%] h-[400px] bg-[#00000030] my-2 overflow-hidden cursor-pointer"
         onClick={() => navigate(`/post/${post._id}`)}
       >
-        {post.imgUrl && post.imgUrl.length > 1 && (
+        {post.imgUrl && post.imgUrl.length > 0 && (
           <img
             src={`http://13.112.212.213/api/uploads/${post.imgUrl[0]}`}
             alt=""
