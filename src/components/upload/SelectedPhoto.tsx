@@ -16,10 +16,7 @@ const SelectedPhoto = ({ previews, setPreview, idx }: Props) => {
       className="w-[150px] h-[150px] overflow-hidden m-3 cursor-pointer"
       onClick={handleClick}
     >
-      <img
-        src={`http://13.112.212.213/api/uploads/${previews[0]}`}
-        alt="test"
-      />
+      <img src={previews[0]} alt="test" />
     </div>
   );
 };

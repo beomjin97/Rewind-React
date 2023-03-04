@@ -76,7 +76,7 @@ const Post = ({ post }: Props) => {
           onClick={() => navigate(`/post/${post._id}`)}
         >
           <img
-            src={`http://13.112.212.213/api/uploads/${post.imgUrl[0]}`}
+            src={post.imgUrl[0]}
             alt=""
             className="w-[100%] h-[100%] object-contain"
           />
