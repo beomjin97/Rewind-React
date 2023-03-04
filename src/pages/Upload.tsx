@@ -21,7 +21,7 @@ const Upload = () => {
     if (location.pathname.startsWith("/update")) {
       getPostById(postId || "")
         .then((res) => {
-          setPreview([res.data.imgUrl]);
+          setPreview(res.data.imgUrl);
           setPhotoFiles(res.data.imgUrl);
           setContent(res.data.content);
           setTags(res.data.tags);
@@ -63,10 +63,6 @@ const Upload = () => {
 
   const handleContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
-    if (content.length === 100) {
-      alert("100자까지만 입력할 수 있습니다.");
-      setContent((prev: string) => prev.slice(0, 100));
-    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -96,7 +92,7 @@ const Upload = () => {
                   <SelectedPhoto
                     key={idx}
                     idx={idx}
-                    photo={preview}
+                    previews={previews}
                     setPreview={setPreview}
                   />
                 ))}
@@ -117,6 +113,7 @@ const Upload = () => {
                   style={{ resize: "none" }}
                   placeholder="최대 100자까지 입력할 수 있습니다."
                   value={content}
+                  maxLength={100}
                   onChange={handleContent}
                 ></textarea>
               </div>
@@ -129,12 +126,12 @@ const Upload = () => {
               >
                 {tags.map((tag, idx) => (
                   <div
-                    className="ml-2 px-2 rounded-lg h-7 bg-[#cbcbcb] flex items-center flex-none"
+                    className="flex items-center flex-none px-2 ml-2 rounded-lg h-7 border-primary border-[2px]"
                     key={idx}
                   >
                     <div className="inline">{tag}</div>
                     <div
-                      className="cursor-pointer inline bg-[#7c7c7c] rounded-[50%] w-[20px] h-[20px] leading-5 text-center ml-1 "
+                      className="cursor-pointer inline bg-primary rounded-[50%] w-[20px] h-[20px] leading-5 text-center ml-1 "
                       onClick={() => {
                         setTags((prev) =>
                           prev.filter((item, _idx) => _idx !== idx)

@@ -11,8 +11,8 @@ import Following from "../components/userDetail/Following";
 export interface userData {
   name: string;
   userName: string;
-  posts: { _id: string; imgUrl: string }[];
-  likes: { _id: string; imgUrl: string }[];
+  posts: { _id: string; imgUrl: string[] }[];
+  likes: { _id: string; imgUrl: string[] }[];
   following: { userName: string; _id: string }[];
   followedBy: { userName: string; _id: string }[];
 }
