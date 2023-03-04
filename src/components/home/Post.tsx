@@ -70,18 +70,19 @@ const Post = ({ post }: Props) => {
         userName={post.author.userName}
         _id={post.author._id}
       />
-      <div
-        className="w-[100%] h-[400px] bg-[#00000030] my-2 overflow-hidden cursor-pointer"
-        onClick={() => navigate(`/post/${post._id}`)}
-      >
-        {post.imgUrl && post.imgUrl.length > 0 && (
+      {post.imgUrl && post.imgUrl.length > 0 && (
+        <div
+          className="w-[100%] h-[400px] bg-[#00000030] my-2 overflow-hidden cursor-pointer"
+          onClick={() => navigate(`/post/${post._id}`)}
+        >
           <img
             src={`http://13.112.212.213/api/uploads/${post.imgUrl[0]}`}
             alt=""
             className="w-[100%] h-[100%] object-contain"
           />
-        )}
-      </div>
+        </div>
+      )}
+
       <div className="flex justify-between my-2">
         <div className="flex">
           {like ? (
