@@ -3,7 +3,8 @@ import InputFiles from "../components/upload/InputFiles";
 import SelectedPhoto from "../components/upload/SelectedPhoto";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 
-import { createPost, getPostById } from "../api";
+import { createPost, getPostById, editPost } from "../api";
+import { convertURLtoFile } from "../util";
 
 const Upload = () => {
   const [previews, setPreview] = useState<string[]>([]);
@@ -22,7 +23,12 @@ const Upload = () => {
       getPostById(postId || "")
         .then((res) => {
           setPreview(res.data.imgUrl);
-          setPhotoFiles(res.data.imgUrl);
+          res.data.imgUrl.forEach((url: string) => {
+            convertURLtoFile(url).then((file: File) => {
+              //@ts-ignore
+              setPhotoFiles((prev: FileList | []) => [...prev, file]);
+            });
+          });
           setContent(res.data.content);
           setTags(res.data.tags);
         })
@@ -48,16 +54,30 @@ const Upload = () => {
       formData.append("content", content);
       if (photoFiles !== undefined) {
         for (let i = 0; i < photoFiles.length; i++) {
-          formData.append("photoFiles", photoFiles[i], photoFiles[i].name);
+          if (typeof photoFiles[i] === "string") {
+            //@ts-ignore
+            //type guard 해놓음
+            convertURLtoFile(photoFiles[i]).then();
+          } else {
+            //@ts-ignore
+            //type guard 해놓음
+            formData.append("photoFiles", photoFiles[i], photoFiles[i].name);
+          }
         }
       }
-      const res = await createPost(formData);
-      console.log(res.data);
-      alert("업로드 되었습니다.");
-      navigate("/");
+      if (location.pathname.startsWith("/update")) {
+        const res = await editPost(postId || "", formData);
+        console.log(res.data);
+        alert("수정 되었습니다.");
+        navigate("/");
+      } else {
+        const res = await createPost(formData);
+        console.log(res.data);
+        alert("업로드 되었습니다.");
+        navigate("/");
+      }
     } catch (error: any) {
-      alert(error.response.data.message);
-      navigate("/auth");
+      console.log(error);
     }
   };
 
