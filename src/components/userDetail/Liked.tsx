@@ -9,7 +9,7 @@ const Liked = ({ likes }: Props) => {
   const navigate = useNavigate();
 
   return likes ? (
-    <div className="flex md:w-[90vw] md:h-auto w-[900px] h-[350px] flex-wrap mx-auto overflow-auto scrollbar-hide">
+    <div className="flex md:w-[90vw] md:h-auto w-[900px] h-[350px] justify-around flex-wrap mx-auto overflow-auto scrollbar-hide">
       {likes.map((item, idx) => (
         <div
           key={idx}
