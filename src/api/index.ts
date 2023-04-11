@@ -2,7 +2,7 @@ import axios from "axios";
 import { signInformData, singUpformData } from "../type";
 
 const devURL = "http://localhost:5001";
-const prodURL = "http://13.112.212.213";
+const prodURL = "http://13.230.193.119";
 
 const API = axios.create({ baseURL: prodURL });
 
