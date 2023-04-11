@@ -1,45 +1,32 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { userType } from "../../type";
 import { userState } from "../../store";
 import { logIn } from "../../api";
+import { useForm } from "react-hook-form";
+
+type Inputs = {
+  email: string;
+  password: string;
+};
 
 const Signin = () => {
   const inputStyle =
     "w-[76%] h-[40px] mx-auto mb-5 block bg-[#DEDEDE] border-2 border-[#00000030] rounded pl-4 focus:outline-primary focus:bg-[#fff]";
-  const [userDataIsEmpty, setUserDataIsEmpty] = useState<boolean>(true);
-  const [userFormData, setUserFormData] = useState<{
-    email: string;
-    password: string;
-  }>({
-    email: "",
-    password: "",
-  });
+
   const [visiblePW, setVisiblePW] = useState<boolean>(false);
-  const [userData, setUserData] = useRecoilState<userType>(userState);
+  const setUserData = useSetRecoilState<userType>(userState);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (userFormData.email !== "" && userFormData.password !== "") {
-      setUserDataIsEmpty(false);
-    } else {
-      setUserDataIsEmpty(true);
-    }
-  }, [userFormData]);
+  const { register, handleSubmit } = useForm<Inputs>();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setUserFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const signIn = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = async (formData: Inputs) => {
     try {
-      const res = await logIn(userFormData);
+      const res = await logIn(formData);
       localStorage.setItem("token", res.data.token);
       const { userName, _id } = jwtDecode<userType>(res.data.token);
       setUserData({ userName, _id });
@@ -50,20 +37,18 @@ const Signin = () => {
   };
 
   return (
-    <form onSubmit={signIn}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <input
-        name="email"
         type="email"
         placeholder="사용자 이메일"
         className={inputStyle}
-        onChange={handleChange}
+        {...register("email")}
       />
       <input
-        name="password"
         type={visiblePW ? "text" : "password"}
         placeholder="비밀번호"
         className={inputStyle}
-        onChange={handleChange}
+        {...register("password")}
       />
       {visiblePW ? (
         <AiFillEye
@@ -77,11 +62,8 @@ const Signin = () => {
         />
       )}
       <button
-        className={`w-[76%] h-[40px] block mx-auto rounded font-bold text-white ${
-          userDataIsEmpty ? "bg-[#DEDEDE]" : "bg-primary"
-        }`}
+        className="w-[76%] h-[40px]  block mx-auto rounded font-bold text-white bg-primary"
         type="submit"
-        disabled={userDataIsEmpty}
       >
         로그인
       </button>

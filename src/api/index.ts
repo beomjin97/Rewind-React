@@ -34,7 +34,7 @@ export const searchUser = (userName: string) =>
   API.get(`/api/search?user=${userName}`);
 
 export const verifyUser = () => API.post("/api/verify");
-export const register = (formData: singUpformData) =>
+export const signUp = (formData: singUpformData) =>
   API.post("/api/auth/signUp", formData);
 export const logIn = (formdata: signInformData) =>
   API.post("/api/auth/signIn", formdata);
