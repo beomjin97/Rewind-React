@@ -69,7 +69,7 @@ const Post = ({ post }: Props) => {
   };
 
   return (
-    <div className="w-[calc(100vw-24px)] max-w-[660px] relative py-2 border-b-2 border-[#00000030] box-content">
+    <div className="w-[calc(100vw-24px)] max-w-[660px] py-2 border-b-2 border-[#00000030] box-content">
       <Profile
         inHeader={false}
         userName={post.author.userName}
