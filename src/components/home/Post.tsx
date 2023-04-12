@@ -85,8 +85,8 @@ const Post = ({ post }: Props) => {
               src={url}
               key={idx}
               alt=""
-              className={`flex-shrink-0 block w-[100%] h-[100%] object-contain duration-500 translate-x-[${
-                -100 * slideCount
+              className={`flex-shrink-0 w-[100%] h-[100%] object-contain duration-500 translate-x-[${
+                slideCount * -100
               }%]`}
             />
           ))}
@@ -99,7 +99,6 @@ const Post = ({ post }: Props) => {
               className="absolute left-0 text-xl cursor-pointer"
               onClick={() => {
                 setSlideCount((prev) => prev - 1);
-                console.log(slideCount);
               }}
             />
           )}
@@ -108,7 +107,6 @@ const Post = ({ post }: Props) => {
               className="absolute right-0 text-xl cursor-pointer"
               onClick={() => {
                 setSlideCount((prev) => prev + 1);
-                console.log(slideCount);
               }}
             />
           )}

@@ -63,7 +63,7 @@ const Home = () => {
         <Menu setIsVisible={setIsVisible} />
         <div
           className={`max-h-[calc(100vh-121px)] scrollbar-hide ${
-            postData.length === 0 ? "overflow-hidden" : "overflow-y-auto"
+            postData.length === 0 ? "overflow-y-hidden" : "overflow-y-auto"
           }`}
           ref={listRef}
           onScroll={handleScroll}
