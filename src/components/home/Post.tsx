@@ -77,7 +77,7 @@ const Post = ({ post }: Props) => {
       />
       {post.imgUrl && post.imgUrl.length > 0 && (
         <div
-          className="w-[100%] h-[400px] flex bg-[#00000030] my-2 cursor-pointer"
+          className="w-[100%] h-[400px] flex bg-[#00000030] my-2 cursor-pointer overflow-hidden"
           onClick={() => navigate(`/post/${post._id}`)}
         >
           {post.imgUrl.map((url, idx) => (
@@ -85,8 +85,8 @@ const Post = ({ post }: Props) => {
               src={url}
               key={idx}
               alt=""
-              className={`flex-shrink-0 w-[100%] h-[100%] object-contain duration-500 translate-x-[${
-                slideCount * -100
+              className={`flex-shrink-0 w-[100%] h-[100%] object-contain duration-500 translate-x-[-${
+                100 * slideCount
               }%]`}
             />
           ))}
