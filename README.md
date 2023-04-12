@@ -18,8 +18,8 @@ http://rewind.p-e.kr/
 <br>
 
 ## 라이브러리 & 프레임워크
-
-React.js based on typescript <br>
+React<br>
+Typescript<br>
 React-router-dom <br>
 Recoil <br>
-Tailwindcss <br>
+Tailwindcss<br>
