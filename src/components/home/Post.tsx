@@ -3,6 +3,10 @@ import { useRecoilValue } from "recoil";
 import Profile from "../common/Profile";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { MdOutlineAddComment } from "react-icons/md";
+import {
+  MdOutlineArrowBackIos,
+  MdOutlineArrowForwardIos,
+} from "react-icons/md";
 import { IoMdSend } from "react-icons/io";
 import moment from "moment";
 import "moment/locale/ko";
@@ -25,6 +29,7 @@ const Post = ({ post }: Props) => {
   const [like, setLike] = useState<boolean>(
     post.like?.includes(user._id) || false
   );
+  const [slideCount, setSlideCount] = useState<number>(0);
 
   const navigate = useNavigate();
 
@@ -64,7 +69,7 @@ const Post = ({ post }: Props) => {
   };
 
   return (
-    <div className="w-[calc(100vw-24px)] max-w-[660px] py-2 border-b-2 border-[#00000030] box-content">
+    <div className="w-[calc(100vw-24px)] max-w-[660px] relative py-2 border-b-2 border-[#00000030] box-content">
       <Profile
         inHeader={false}
         userName={post.author.userName}
@@ -72,14 +77,41 @@ const Post = ({ post }: Props) => {
       />
       {post.imgUrl && post.imgUrl.length > 0 && (
         <div
-          className="w-[100%] h-[400px] bg-[#00000030] my-2 overflow-hidden cursor-pointer"
+          className="w-[100%] h-[400px] flex bg-[#00000030] my-2 cursor-pointer"
           onClick={() => navigate(`/post/${post._id}`)}
         >
-          <img
-            src={post.imgUrl[0]}
-            alt=""
-            className="w-[100%] h-[100%] object-contain"
-          />
+          {post.imgUrl.map((url, idx) => (
+            <img
+              src={url}
+              key={idx}
+              alt=""
+              className={`flex-shrink-0 block w-[100%] h-[100%] object-contain duration-500 translate-x-[${
+                -100 * slideCount
+              }%]`}
+            />
+          ))}
+        </div>
+      )}
+      {post.imgUrl && post.imgUrl.length > 1 && (
+        <div className="relative h-[20px]">
+          {slideCount !== 0 && (
+            <MdOutlineArrowBackIos
+              className="absolute left-0 text-xl cursor-pointer"
+              onClick={() => {
+                setSlideCount((prev) => prev - 1);
+                console.log(slideCount);
+              }}
+            />
+          )}
+          {post.imgUrl.length - 1 !== slideCount && (
+            <MdOutlineArrowForwardIos
+              className="absolute right-0 text-xl cursor-pointer"
+              onClick={() => {
+                setSlideCount((prev) => prev + 1);
+                console.log(slideCount);
+              }}
+            />
+          )}
         </div>
       )}
 
