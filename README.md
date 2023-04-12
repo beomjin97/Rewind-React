@@ -1,5 +1,5 @@
 # 개인 SNS 프로젝트
-http://13.112.212.213
+http://rewind.p-e.kr/
 <br>
 
 ## 디자인 계획
@@ -18,8 +18,8 @@ http://13.112.212.213
 <br>
 
 ## 라이브러리 & 프레임워크
-
-React.js based on typescript <br>
+React<br>
+Typescript<br>
 React-router-dom <br>
 Recoil <br>
-Tailwindcss <br>
+Tailwindcss<br>
