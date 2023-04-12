@@ -112,7 +112,7 @@ const Upload = () => {
                   <SelectedPhoto
                     key={idx}
                     idx={idx}
-                    previews={previews}
+                    preview={preview}
                     setPreview={setPreview}
                   />
                 ))}
