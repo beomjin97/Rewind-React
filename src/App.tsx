@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { useRecoilState } from "recoil";
+import "swiper/css/bundle";
 
 import Auth from "./pages/Auth";
 import Home from "./pages/Home";
@@ -9,7 +10,6 @@ import PostDetail from "./pages/PostDetail";
 import Upload from "./pages/Upload";
 import UserDetail from "./pages/UserDetail";
 import Main from "./components/common/Main";
-//import Update from "./pages/Update";
 
 import { userState } from "../src/store";
 import { userType } from "../src/type";
