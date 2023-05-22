@@ -3,6 +3,10 @@ import { useRecoilValue } from "recoil";
 import Profile from "../common/Profile";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { MdOutlineAddComment } from "react-icons/md";
+import {
+  MdOutlineArrowBackIos,
+  MdOutlineArrowForwardIos,
+} from "react-icons/md";
 import { IoMdSend } from "react-icons/io";
 import moment from "moment";
 import "moment/locale/ko";
@@ -27,6 +31,7 @@ const Post = ({ post }: Props) => {
   const [like, setLike] = useState<boolean>(
     post.like?.includes(user._id) || false
   );
+  const [slideCount, setSlideCount] = useState<number>(0);
 
   const navigate = useNavigate();
   console.log(post.imgUrl);

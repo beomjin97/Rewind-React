@@ -15,7 +15,7 @@ const ProfileMenu = ({ _id, userName }: Props) => {
   const commonSyle = "py-1 pl-1 hover:bg-[#00000030]";
   return (
     <div className="absolute right-0 top-9 border-[1px] border-[#00000030] bg-white w-32">
-      <div className="py-1 pl-1 cursor-default  break-words">{userName}</div>
+      <div className="py-1 pl-1 break-words cursor-default">{userName}</div>
       <div className={commonSyle} onClick={() => navigate(`/user/${_id}`)}>
         프로필
       </div>

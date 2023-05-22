@@ -1,6 +1,8 @@
 import axios from "axios";
 import { signInformData, singUpformData } from "../type";
+
 const API = axios.create({ baseURL: process.env.REACT_APP_SERVER_DOMAIN_NAME });
+
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("token") && req.headers) {
@@ -30,7 +32,7 @@ export const searchUser = (userName: string) =>
   API.get(`/api/search?user=${userName}`);
 
 export const verifyUser = () => API.post("/api/verify");
-export const register = (formData: singUpformData) =>
-  API.post("/api/auth/signIn", formData);
+export const signUp = (formData: singUpformData) =>
+  API.post("/api/auth/signUp", formData);
 export const logIn = (formdata: signInformData) =>
   API.post("/api/auth/signIn", formdata);

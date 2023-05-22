@@ -1,6 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { register } from "../../api";
+import { signUp } from "../../api";
+import { useForm } from "react-hook-form";
+
+type Inputs = {
+  name: string;
+  userName: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+};
 
 const Signup = () => {
   const inputStyle =
@@ -8,44 +17,12 @@ const Signup = () => {
 
   const [visiblePW, setVisiblePW] = useState<boolean>(false);
   const [visiblePWC, setVisiblePWC] = useState<boolean>(false);
-  const [userDataIsEmpty, setUserDataIsEmpty] = useState<boolean>(true);
 
-  const [userData, setUserData] = useState<{
-    name: string;
-    userName: string;
-    email: string;
-    password: string;
-    passwordConfirm: string;
-  }>({
-    name: "",
-    userName: "",
-    email: "",
-    password: "",
-    passwordConfirm: "",
-  });
+  const { register, handleSubmit } = useForm<Inputs>();
 
-  useEffect(() => {
-    if (
-      userData.email !== "" &&
-      userData.name !== "" &&
-      userData.password !== "" &&
-      userData.passwordConfirm !== "" &&
-      userData.userName !== ""
-    ) {
-      setUserDataIsEmpty(false);
-    } else {
-      setUserDataIsEmpty(true);
-    }
-  }, [userData]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const signUp = async (e: any) => {
-    e.preventDefault();
+  const onSubmit = async (formData: Inputs) => {
     try {
-      const res = await register(userData);
+      const res = await signUp(formData);
       alert(res.data.message);
     } catch (error: any) {
       alert(error.response.data.message);
@@ -53,34 +30,30 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={signUp}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <input
-        name="name"
         type="text"
         placeholder="이름"
         className={inputStyle}
-        onChange={handleChange}
+        {...register("name", { required: true })}
       />
       <input
-        name="userName"
         type="text"
         placeholder="사용자 이름"
         className={inputStyle}
-        onChange={handleChange}
+        {...register("userName", { required: true })}
       />
       <input
-        name="email"
         type="email"
         placeholder="사용자 이메일"
         className={inputStyle}
-        onChange={handleChange}
+        {...register("email", { required: true })}
       />
       <input
-        name="password"
         type={visiblePW ? "text" : "password"}
         placeholder="비밀번호"
         className={inputStyle}
-        onChange={handleChange}
+        {...register("password", { required: true })}
       />
       {visiblePW ? (
         <AiFillEye
@@ -94,11 +67,10 @@ const Signup = () => {
         />
       )}
       <input
-        name="passwordConfirm"
         type={visiblePWC ? "text" : "password"}
         placeholder="비밀번호 확인"
         className={inputStyle}
-        onChange={handleChange}
+        {...register("passwordConfirm", { required: true })}
       />
       {visiblePWC ? (
         <AiFillEye
@@ -112,11 +84,8 @@ const Signup = () => {
         />
       )}
       <button
-        className={`w-[76%] h-[40px]  block mx-auto rounded font-bold text-white ${
-          userDataIsEmpty ? "bg-[#DEDEDE]" : "bg-primary"
-        }`}
-        onClick={signUp}
-        disabled={userDataIsEmpty}
+        className="w-[76%] h-[40px]  block mx-auto rounded font-bold text-white bg-primary"
+        type="submit"
       >
         회원가입
       </button>
