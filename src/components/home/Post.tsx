@@ -7,6 +7,8 @@ import { IoMdSend } from "react-icons/io";
 import moment from "moment";
 import "moment/locale/ko";
 import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper";
 
 import { createComment, likePost } from "../../api";
 import { PostType } from "../../type";
@@ -27,7 +29,7 @@ const Post = ({ post }: Props) => {
   );
 
   const navigate = useNavigate();
-
+  console.log(post.imgUrl);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     createComment(comment, post._id)
@@ -70,18 +72,22 @@ const Post = ({ post }: Props) => {
         userName={post.author.userName}
         _id={post.author._id}
       />
-      <div
-        className="w-[100%] h-[400px] bg-[#00000030] my-2 overflow-hidden cursor-pointer"
-        onClick={() => navigate(`/post/${post._id}`)}
-      >
-        {post.imgUrl && post.imgUrl.length > 1 && (
-          <img
-            src={`http://localhost:5001/api/uploads/${post.imgUrl[0]}`}
-            alt=""
-            className="w-[100%] h-[100%] object-contain"
-          />
-        )}
-      </div>
+      {post.imgUrl && post.imgUrl.length > 0 && (
+        <div className="w-[100%] h-[400px] bg-[#00000030] my-2 overflow-hidden cursor-pointer">
+          <Swiper className="w-[100%] h-[100%]">
+            {post.imgUrl.map((i) => (
+              <SwiperSlide>
+                <img
+                  src={i}
+                  alt=""
+                  className="w-[100%] h-[100%] object-contain"
+                  onClick={() => navigate(`/post/${post._id}`)}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      )}
       <div className="flex justify-between my-2">
         <div className="flex">
           {like ? (

@@ -13,6 +13,8 @@ import Profile from "../components/common/Profile";
 import { userState } from "../store";
 import Like from "../components/postDetail/Like";
 import { IoMdSend } from "react-icons/io";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper";
 
 const PostDetail = () => {
   //@ts-ignore
@@ -71,11 +73,17 @@ const PostDetail = () => {
           onClick={() => navigate(-1)}
         />
         <div className="w-[100%] md:h-auto h-[660px] bg-[#D9D9D9] overflow-hidden flex justify-center">
-          <img
-            src={post.imgUrl ? post.imgUrl[0] : ""}
-            alt=""
-            className="h-[100%] object-scale-down"
-          />
+          <Swiper navigation={true} modules={[Navigation]}>
+            {post.imgUrl?.map((i) => (
+              <SwiperSlide>
+                <img
+                  src={i ? i : ""}
+                  alt=""
+                  className="h-[100%] object-scale-down my-auto"
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
       <div className="bg-[#f2f2f2] w-[45%] md:w-full p-10 md:p-5">
