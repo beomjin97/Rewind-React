@@ -1,10 +1,8 @@
 import axios from "axios";
 import { signInformData, singUpformData } from "../type";
 
-const devURL = "http://localhost:5001";
-const prodURL = "http://13.230.193.119";
+const API = axios.create({ baseURL: process.env.REACT_APP_SERVER_DOMAIN_NAME });
 
-const API = axios.create({ baseURL: prodURL });
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("token") && req.headers) {

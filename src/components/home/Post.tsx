@@ -11,6 +11,8 @@ import { IoMdSend } from "react-icons/io";
 import moment from "moment";
 import "moment/locale/ko";
 import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper";
 
 import { createComment, likePost } from "../../api";
 import { PostType } from "../../type";
@@ -32,7 +34,7 @@ const Post = ({ post }: Props) => {
   const [slideCount, setSlideCount] = useState<number>(0);
 
   const navigate = useNavigate();
-
+  console.log(post.imgUrl);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     createComment(comment, post._id)
@@ -76,43 +78,21 @@ const Post = ({ post }: Props) => {
         _id={post.author._id}
       />
       {post.imgUrl && post.imgUrl.length > 0 && (
-        <div
-          className="w-[100%] h-[400px] flex bg-[#00000030] my-2 cursor-pointer overflow-hidden"
-          onClick={() => navigate(`/post/${post._id}`)}
-        >
-          {post.imgUrl.map((url, idx) => (
-            <img
-              src={url}
-              key={idx}
-              alt=""
-              className={`flex-shrink-0 w-[100%] h-[100%] object-contain duration-500 translate-x-[-${
-                100 * slideCount
-              }%]`}
-            />
-          ))}
+        <div className="w-[100%] h-[400px] bg-[#00000030] my-2 overflow-hidden cursor-pointer">
+          <Swiper className="w-[100%] h-[100%]">
+            {post.imgUrl.map((i) => (
+              <SwiperSlide>
+                <img
+                  src={i}
+                  alt=""
+                  className="w-[100%] h-[100%] object-contain"
+                  onClick={() => navigate(`/post/${post._id}`)}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       )}
-      {post.imgUrl && post.imgUrl.length > 1 && (
-        <div className="relative h-[20px]">
-          {slideCount !== 0 && (
-            <MdOutlineArrowBackIos
-              className="absolute left-0 text-xl cursor-pointer"
-              onClick={() => {
-                setSlideCount((prev) => prev - 1);
-              }}
-            />
-          )}
-          {post.imgUrl.length - 1 !== slideCount && (
-            <MdOutlineArrowForwardIos
-              className="absolute right-0 text-xl cursor-pointer"
-              onClick={() => {
-                setSlideCount((prev) => prev + 1);
-              }}
-            />
-          )}
-        </div>
-      )}
-
       <div className="flex justify-between my-2">
         <div className="flex">
           {like ? (
