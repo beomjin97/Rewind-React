@@ -1,4 +1,5 @@
 # 개인 SNS 프로젝트
+
 http://rewind.p-e.kr/
 <br>
 
@@ -18,8 +19,11 @@ http://rewind.p-e.kr/
 <br>
 
 ## 라이브러리 & 프레임워크
+
 React<br>
 Typescript<br>
 React-router-dom <br>
 Recoil <br>
 Tailwindcss<br>
+
+## ci/cd 구축
