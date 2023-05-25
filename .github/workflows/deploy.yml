@@ -8,7 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    env:
+      REACT_APP_SERVER_DOMAIN_NAME: ${{ secrets.SERVER_DOMAIN }}
+      EACT_APP_DEV_LOCAL_SERVER: ${{ secrets.LOCAL_SERVER }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
