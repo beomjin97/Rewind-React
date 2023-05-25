@@ -39,7 +39,7 @@ jobs:
 #           target: /build
 
       - name: SSH into EC2 instance and restart server
-        uses: appleboy/ssh-action@v0.1.4
+        uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
