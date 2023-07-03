@@ -9,6 +9,7 @@ jobs:
   deploy:
     name: Deploy to production
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -18,9 +19,12 @@ jobs:
         with:
           node-version: 16
 
-      - name: Build
+      - name: Install dependencies and build
+        env:
+          REACT_APP_SERVER_DOMAIN_NAME: ${{ secrets.SERVER_DOMAIN }}
+          EACT_APP_DEV_LOCAL_SERVER: ${{ secrets.LOCAL_SERVER }}
         run: |
-          npm install
+          npm i
           npm run build
 
       - name: clear directory
