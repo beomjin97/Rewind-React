@@ -4,7 +4,7 @@ import SelectedPhoto from "../components/upload/SelectedPhoto";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 import { createPost, getPostById, editPost } from "../api";
-import { convertURLtoFile } from "../util";
+import { convertURLtoFile } from "../util/convertURLtoFile";
 
 const Upload = () => {
   const [previews, setPreview] = useState<string[]>([]);

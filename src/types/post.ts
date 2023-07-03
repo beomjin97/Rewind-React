@@ -1,3 +1,5 @@
+import { userType } from "./user";
+
 export interface CommentType {
   _id: string;
   author: userType;
@@ -15,20 +17,4 @@ export interface PostType {
   comment?: CommentType[];
   createdAt: Date;
   updatedAt?: Date;
-}
-
-export interface userType {
-  userName: string;
-  _id: string;
-}
-
-export interface signInformData {
-  email: string;
-  password: string;
-}
-
-export interface singUpformData extends signInformData {
-  name: string;
-  userName: string;
-  passwordConfirm: string;
 }
