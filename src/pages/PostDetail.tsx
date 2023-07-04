@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { createComment, getPostById, deletePost } from "../api";
-import { PostType } from "../type";
+import { PostType } from "../types/post";
 import { MdOutlineCancel } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
 import { RiDeleteBin5Line } from "react-icons/ri";

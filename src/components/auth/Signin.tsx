@@ -3,7 +3,7 @@ import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { useSetRecoilState } from "recoil";
-import { userType } from "../../type";
+import { userType } from "../../types/user";
 import { userState } from "../../store";
 import { logIn } from "../../api";
 import { useForm } from "react-hook-form";

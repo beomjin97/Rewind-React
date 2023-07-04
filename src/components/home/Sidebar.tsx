@@ -1,6 +1,5 @@
 import { FiUpload } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import Profile from "../common/Profile";
 
 interface props {
   isVisible: boolean;

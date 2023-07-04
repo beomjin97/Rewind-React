@@ -7,7 +7,7 @@ import { MdOutlineImageNotSupported } from "react-icons/md";
 import { useSearchParams } from "react-router-dom";
 import { throttle } from "throttle-debounce";
 
-import { PostType } from "../type";
+import { PostType } from "../types/post";
 
 const Home = () => {
   const [postData, setPostData] = useState<PostType[]>([]);

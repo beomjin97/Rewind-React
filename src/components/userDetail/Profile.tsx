@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { userState } from "../../store";
-import { userType } from "../../type";
+import { userType } from "../../types/user";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { followUser } from "../../api";

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
 import Profile from "./Profile";
-import { userType } from "../../type";
+import { userType } from "../../types/user";
 import { userState } from "../../store";
 import { searchUser } from "../../api";
 

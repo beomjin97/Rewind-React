@@ -3,19 +3,14 @@ import { useRecoilValue } from "recoil";
 import Profile from "../common/Profile";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { MdOutlineAddComment } from "react-icons/md";
-import {
-  MdOutlineArrowBackIos,
-  MdOutlineArrowForwardIos,
-} from "react-icons/md";
 import { IoMdSend } from "react-icons/io";
 import moment from "moment";
 import "moment/locale/ko";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
 
 import { createComment, likePost } from "../../api";
-import { PostType } from "../../type";
+import { PostType } from "../../types/post";
 import { userState } from "../../store";
 
 interface Props {
@@ -31,7 +26,6 @@ const Post = ({ post }: Props) => {
   const [like, setLike] = useState<boolean>(
     post.like?.includes(user._id) || false
   );
-  const [slideCount, setSlideCount] = useState<number>(0);
 
   const navigate = useNavigate();
   console.log(post.imgUrl);
