@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import ErrorBoundary from "../pages/Error";
+import NotFound from "../pages/NotFound";
 
 const Auth = lazy(() => import("../pages/Auth"));
 const Home = lazy(() => import("../pages/Home"));
@@ -24,6 +25,7 @@ const Routing = () => {
             </Route>
             <Route path="auth" element={<Auth />} />
             <Route path="post/:postId" element={<PostDetail />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </Suspense>
