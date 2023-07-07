@@ -7,10 +7,10 @@ import { userState } from "../store";
 
 const useAuthUser = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
   const setUserData = useSetRecoilState<userType>(userState);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     if (token) {
       const decodedData: DecodedJWT = jwtDecode(token);
       if (decodedData.exp * 1000 <= Date.now()) {
@@ -22,7 +22,7 @@ const useAuthUser = () => {
     } else {
       navigate("/auth");
     }
-  }, []);
+  }, [navigate, setUserData]);
 };
 
 export default useAuthUser;
