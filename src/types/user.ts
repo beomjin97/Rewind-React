@@ -10,7 +10,6 @@ export interface signInformData {
 
 export interface singUpformData extends signInformData {
   name: string;
-  userName: string;
   passwordConfirm: string;
 }
 
