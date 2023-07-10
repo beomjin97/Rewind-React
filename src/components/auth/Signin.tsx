@@ -1,74 +1,35 @@
-import { useState } from "react";
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
-import jwtDecode from "jwt-decode";
-import { useSetRecoilState } from "recoil";
-import { userType } from "../../types/user";
-import { userState } from "../../store";
-import { logIn } from "../../api";
+import { TextField } from "@mui/material";
+import { Dispatch, FC, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
+import AuthModal from "./AuthModal";
 
-type Inputs = {
-  email: string;
-  password: string;
-};
+interface Props {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}
 
-const Signin = () => {
-  const inputStyle =
-    "w-[76%] h-[40px] mx-auto mb-5 block bg-[#DEDEDE] border-2 border-[#00000030] rounded pl-4 focus:outline-primary focus:bg-[#fff]";
-
-  const [visiblePW, setVisiblePW] = useState<boolean>(false);
-  const setUserData = useSetRecoilState<userType>(userState);
-
-  const navigate = useNavigate();
-
-  const { register, handleSubmit } = useForm<Inputs>();
-
-  const onSubmit = async (formData: Inputs) => {
-    try {
-      const res = await logIn(formData);
-      localStorage.setItem("token", res.data.token);
-      const { userName, _id } = jwtDecode<userType>(res.data.token);
-      setUserData({ userName, _id });
-      navigate("/");
-    } catch (error: any) {
-      alert(error.response.data.message);
-    }
-  };
-
+const Auth2: FC<Props> = ({ isOpen, setIsOpen }) => {
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input
+    <AuthModal
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+      role="로그인"
+      submit={() => Promise.resolve()}
+    >
+      <TextField
+        label="계정"
+        helperText="이메일을 입력해주세요"
         type="email"
-        placeholder="사용자 이메일"
-        className={inputStyle}
-        {...register("email")}
+        required
       />
-      <input
-        type={visiblePW ? "text" : "password"}
-        placeholder="비밀번호"
-        className={inputStyle}
-        {...register("password")}
+      <TextField
+        label="비밀번호"
+        helperText="이메일을 입력해주세요"
+        type="password"
+        required
       />
-      {visiblePW ? (
-        <AiFillEye
-          className="block absolute right-[15%] top-[280px] cursor-pointer text-lg"
-          onClick={() => setVisiblePW(false)}
-        />
-      ) : (
-        <AiFillEyeInvisible
-          className="block absolute right-[15%] top-[280px] cursor-pointer text-lg"
-          onClick={() => setVisiblePW(true)}
-        />
-      )}
-      <button
-        className="w-[76%] h-[40px]  block mx-auto rounded font-bold text-white bg-primary"
-        type="submit"
-      >
-        로그인
-      </button>
-    </form>
+    </AuthModal>
   );
 };
 
-export default Signin;
+export default Auth2;

@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import ErrorBoundary from "../pages/Error";
 import NotFound from "../pages/NotFound";
+import Loading from "../components/fallback/Loading";
 
 const Home = lazy(() => import("../pages/Home"));
 const PostDetail = lazy(() => import("../pages/PostDetail"));
@@ -13,7 +14,7 @@ const Routing = () => {
   return (
     // TODO fallback 컴포넌트 제작
     <ErrorBoundary fallback={<p>에러 발생</p>}>
-      <Suspense fallback={<p>로딩 중...</p>}>
+      <Suspense fallback={<Loading />}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Main />}>
