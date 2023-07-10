@@ -66,11 +66,7 @@ const Post = ({ post }: Props) => {
 
   return (
     <div className="w-[calc(100vw-24px)] max-w-[660px] py-2 border-b-2 border-[#00000030] box-content">
-      <Profile
-        inHeader={false}
-        userName={post.author.userName}
-        _id={post.author._id}
-      />
+      <Profile inHeader={false} name={post.author.name} _id={post.author._id} />
       {post.imgUrl && post.imgUrl.length > 0 && (
         <div className="w-[100%] h-[400px] bg-[#00000030] my-2 overflow-hidden cursor-pointer">
           <Swiper className="w-[100%] h-[100%]">
@@ -123,7 +119,7 @@ const Post = ({ post }: Props) => {
                 navigate(`/user/${post.comment && post.comment[0].author._id}`)
               }
             >
-              {post.comment[0].author.userName}
+              {post.comment[0].author.name}
             </span>
             <span>{post.comment[0].content}</span>
           </>
@@ -132,7 +128,7 @@ const Post = ({ post }: Props) => {
       {isInputActive && (
         <div className="relative">
           <form onSubmit={handleSubmit}>
-            <span className="mr-2 font-bold">{user.userName}</span>
+            <span className="mr-2 font-bold">{user.name}</span>
             <input
               type="text"
               value={comment}

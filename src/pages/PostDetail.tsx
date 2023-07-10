@@ -90,7 +90,7 @@ const PostDetail = () => {
         <div className="flex justify-between ">
           <Profile
             inHeader={false}
-            userName={post.author.userName}
+            name={post.author.name}
             _id={post.author._id}
           />
           <span className="text-md">{moment(post.createdAt).fromNow()}</span>
@@ -125,7 +125,7 @@ const PostDetail = () => {
         <div className="relative mt-4">
           <form onSubmit={handleSubmit}>
             <span className="mr-2 text-xl font-bold sm:hidden">
-              {user.userName}
+              {user.name}
             </span>
             <input
               type="text"
@@ -151,7 +151,7 @@ const PostDetail = () => {
                   className="mr-4 text-xl font-bold cursor-pointer"
                   onClick={() => navigate(`/user/${item.author._id}`)}
                 >
-                  {item.author.userName}
+                  {item.author.name}
                 </span>
                 <span className="text-xl">{item.content}</span>
               </div>

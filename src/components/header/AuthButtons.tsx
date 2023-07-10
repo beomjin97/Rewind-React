@@ -3,10 +3,16 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import { useState } from "react";
 import Auth3 from "../auth/Signup";
 import Auth2 from "../auth/Signin";
+import { useAuth } from "../../context/AuthContext";
 
 const AuthButtons = () => {
   const [isSignupOpen, setIsSignupOpen] = useState(false);
   const [isSigninOpen, setIsSigninOpen] = useState(false);
+  const useContext = useAuth();
+
+  if (useContext === null) {
+    throw new Error("예상치 못한 에러입니다.");
+  }
 
   return (
     <>
@@ -30,8 +36,16 @@ const AuthButtons = () => {
           로그인
         </Button>
       </ButtonGroup>
-      <Auth3 isOpen={isSignupOpen} setIsOpen={setIsSignupOpen} />
-      <Auth2 isOpen={isSigninOpen} setIsOpen={setIsSigninOpen} />
+      <Auth3
+        isOpen={isSignupOpen}
+        setIsOpen={setIsSignupOpen}
+        submit={useContext.signup}
+      />
+      <Auth2
+        isOpen={isSigninOpen}
+        setIsOpen={setIsSigninOpen}
+        submit={useContext.signin}
+      />
     </>
   );
 };

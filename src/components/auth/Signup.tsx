@@ -2,21 +2,20 @@ import { Dispatch, FC, SetStateAction, useState } from "react";
 import AuthModal from "./AuthModal";
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { singUpformData } from "../../types/user";
-import { signUp } from "../../api";
+import { SignUpformData } from "../../types/user";
 
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  submit: (formdata: SignUpformData) => Promise<void>;
 }
 
-const Auth3: FC<Props> = ({ isOpen, setIsOpen }) => {
-  const { register, handleSubmit } = useForm<singUpformData>();
-
-  const onSubmit = async (formData: singUpformData) => {
+const Signup: FC<Props> = ({ isOpen, setIsOpen, submit }) => {
+  const { register, handleSubmit } = useForm<SignUpformData>();
+  const onSubmit = async (formData: SignUpformData) => {
     try {
-      const res = await signUp(formData);
-      alert(res.data.message);
+      await submit(formData);
+      setIsOpen(false);
     } catch (error: any) {
       alert(error.response.data.message);
     }
@@ -61,4 +60,4 @@ const Auth3: FC<Props> = ({ isOpen, setIsOpen }) => {
   );
 };
 
-export default Auth3;
+export default Signup;

@@ -6,11 +6,11 @@ import ProfileMenu from "./ProfileMenu";
 
 interface props {
   inHeader: boolean;
-  userName: string;
+  name: string;
   _id: string;
 }
 
-const Profile = ({ inHeader, userName, _id }: props) => {
+const Profile = ({ inHeader, name, _id }: props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   return (
@@ -35,7 +35,7 @@ const Profile = ({ inHeader, userName, _id }: props) => {
             className="max-w-[130px] font-bold text-lg leading-10 truncate md:hidden"
             onClick={() => navigate(`/user/${_id}`)}
           >
-            {userName}
+            {name}
           </div>
           <div
             className="w-[40px] h-[40px] rounded-[20px] bg-primary mr-1 "
@@ -52,11 +52,11 @@ const Profile = ({ inHeader, userName, _id }: props) => {
             className="max-w-[130px] font-bold text-lg leading-10 truncate right-0"
             onClick={() => navigate(`/user/${_id}`)}
           >
-            {userName}
+            {name}
           </div>
         </>
       )}
-      {isOpen && <ProfileMenu _id={_id} userName={userName} />}
+      {isOpen && <ProfileMenu _id={_id} name={name} />}
     </div>
   );
 };
