@@ -17,7 +17,7 @@ const useAuthUser = () => {
         localStorage.removeItem("token");
         navigate("/auth");
       } else {
-        setUserData({ userName: decodedData.userName, _id: decodedData._id });
+        setUserData({ name: decodedData.name, _id: decodedData._id });
       }
     } else {
       navigate("/auth");

@@ -1,16 +1,32 @@
 import "swiper/css/bundle";
 import Routing from "./routing/Routing";
-import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthProvider } from "./context/AuthContext";
+import { AuthService } from "./services/authService";
+import { StorageService } from "./services/storageService";
+import { API } from "./api";
+import { PostProvider } from "./context/PostContext";
+import { PostService } from "./services/postService";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+    },
+  },
+});
+const storageService = new StorageService(localStorage);
+const authService = new AuthService(API, storageService);
+const postService = new PostService(API);
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <Routing />
-      </RecoilRoot>
+      <AuthProvider authService={authService}>
+        <PostProvider postService={postService}>
+          <Routing />
+        </PostProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 interface Props {
-  following: { userName: string; _id: string }[];
+  following: { name: string; _id: string }[];
 }
 
 const Following = ({ following }: Props) => {
@@ -19,7 +19,7 @@ const Following = ({ following }: Props) => {
             className="max-w-[130px] cursor-pointer font-bold text-lg leading-10"
             onClick={() => navigate(`/user/${item._id}`)}
           >
-            {item.userName}
+            {item.name}
           </div>
         </div>
       ))}

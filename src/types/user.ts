@@ -1,21 +1,20 @@
 export interface userType {
-  userName: string;
+  name: string;
   _id: string;
 }
 
-export interface signInformData {
+export interface SignInformData {
   email: string;
   password: string;
 }
 
-export interface singUpformData extends signInformData {
+export interface SignUpformData extends SignInformData {
   name: string;
-  userName: string;
   passwordConfirm: string;
 }
 
 export interface DecodedJWT {
-  userName: string;
+  name: string;
   _id: string;
   iat: number;
   exp: number;

@@ -10,11 +10,10 @@ import Following from "../components/userDetail/Following";
 
 export interface userData {
   name: string;
-  userName: string;
   posts: { _id: string; imgUrl: string[] }[];
   likes: { _id: string; imgUrl: string[] }[];
-  following: { userName: string; _id: string }[];
-  followedBy: { userName: string; _id: string }[];
+  following: { name: string; _id: string }[];
+  followedBy: { name: string; _id: string }[];
 }
 
 const UserDetail = () => {
@@ -39,7 +38,6 @@ const UserDetail = () => {
     <>
       <Profile
         name={userData?.name || ""}
-        userName={userData?.userName || ""}
         postNum={userData?.posts?.length || 0}
         followers={userData?.followedBy || []}
         followerNum={userData?.followedBy?.length || 0}

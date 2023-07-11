@@ -8,16 +8,14 @@ import { MdOutlineSettings } from "react-icons/md";
 import Modal from "../common/Modal";
 interface Props {
   name: string;
-  userName: string;
   postNum: number;
-  followers: { userName: string; _id: string }[];
+  followers: { name: string; _id: string }[];
   followerNum: number;
   followingNum: number;
 }
 
 const Profile = ({
   name,
-  userName,
   postNum,
   followers,
   followerNum,
@@ -69,7 +67,6 @@ const Profile = ({
             />
           </div>
           <div className="text-[#00000080]">{name}</div>
-          <div className="text-4xl font-thin">{userName}</div>
         </div>
         <div className="md:hidden w-[1px] h-[200px] border-[1px] border-[#00000050]"></div>
         <div className="w-[150px] md:mx-auto">
